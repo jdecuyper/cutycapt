@@ -24,9 +24,12 @@ private slots:
 
 private:
   void TryDelayedRender();
-  void saveSnapshot();
   bool mSawInitialLayout;
   bool mSawDocumentComplete;
+  void saveSnapshot();
+
+signals:
+  void imageWasSaved();
 
 protected:
   QString      mOutput;

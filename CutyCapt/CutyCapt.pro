@@ -19,10 +19,14 @@ contains(CONFIG, static): {
 SOURCES += main.cpp \
     CutyCapt.cpp \
     CutyPage.cpp \
-    CutyHelp.cpp
+    CutyHelp.cpp \
+    CutyArgs.cpp \
+    CutyTimer.cpp
 
 HEADERS += \
     CutyCapt.h \
     CutyPage.h \
     CutyHelp.h \
-    CutyExt.h
+    CutyExt.h \
+    CutyArgs.h \
+    CutyTimer.h

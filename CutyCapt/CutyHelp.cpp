@@ -4,11 +4,10 @@
 
 using namespace std;
 
-void
-CutyHelp::Show(){
+void CutyHelp::Show(){
     printf("%s",
          " -----------------------------------------------------------------------------\n"
-         " Usage: CutyCapt --url=http://www.example.org/ --out=localfile.png            \n"
+         " Usage: CutyCapt --url=http://www.google.com/ --out=google.png            \n"
          " -----------------------------------------------------------------------------\n"
          "  --help                         Print this help page and exit                \n"
          "  --url=<url>                    The URL to capture (http:...|file:...|...)   \n"

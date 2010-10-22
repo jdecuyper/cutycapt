@@ -26,24 +26,21 @@ CutyCapt::CutyCapt(CutyPage* page, const QString& output, int delay, OutputForma
   mFormat = format;
 }
 
-void
-CutyCapt::InitialLayoutCompleted() {
+void CutyCapt::InitialLayoutCompleted() {
   mSawInitialLayout = true;
 
   if (mSawInitialLayout && mSawDocumentComplete)
     TryDelayedRender();
 }
 
-void
-CutyCapt::DocumentComplete(bool /*ok*/) {
+void CutyCapt::DocumentComplete(bool /*ok*/) {
   mSawDocumentComplete = true;
 
   if (mSawInitialLayout && mSawDocumentComplete)
     TryDelayedRender();
 }
 
-void
-CutyCapt::TryDelayedRender() {
+void CutyCapt::TryDelayedRender() {
 
   if (mDelay > 0) {
     QTimer::singleShot(mDelay, this, SLOT(Delayed()));
@@ -54,20 +51,17 @@ CutyCapt::TryDelayedRender() {
   QApplication::exit();
 }
 
-void
-CutyCapt::Timeout() {
+void CutyCapt::Timeout() {
   saveSnapshot();
   QApplication::exit();
 }
 
-void
-CutyCapt::Delayed() {
+void CutyCapt::Delayed() {
   saveSnapshot();
   QApplication::exit();
 }
 
-void
-CutyCapt::saveSnapshot() {
+void CutyCapt::saveSnapshot() {
     QWebFrame *mainFrame = mPage->mainFrame();
     QPainter painter;
     const char* format = NULL;
@@ -125,7 +119,9 @@ CutyCapt::saveSnapshot() {
           mainFrame->render(&painter);
           painter.end();
           // TODO: add quality
-          image.save(mOutput, format);
+          printf("%s", "Saving image...\n");
+          image.save(mOutput, format, 10);
+          emit imageWasSaved();
         }
       };
 }
