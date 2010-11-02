@@ -1,4 +1,4 @@
-A git-svn import of Björn Höhrmann's CutyCapt.
+A git-svn import of BjÃ¶rn HÃ¶hrmann's CutyCapt.
 
 // simple mock for argv
 argc = 4;
