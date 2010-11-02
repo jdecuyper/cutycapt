@@ -17,13 +17,17 @@ CutyCapt::CutyCapt()
 {
 }
 
-CutyCapt::CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format) {
+CutyCapt::CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format, int quality) {
   mPage = page;
   mOutput = output;
   mDelay = delay;
   mSawInitialLayout = false;
   mSawDocumentComplete = false;
   mFormat = format;
+  if(quality <= QUALITY_MAX && quality >= QUALITY_MIN)
+    mQuality = quality * 10;
+  else
+    mQuality = -1; //default
 }
 
 void CutyCapt::InitialLayoutCompleted() {
@@ -119,8 +123,9 @@ void CutyCapt::saveSnapshot() {
           mainFrame->render(&painter);
           painter.end();
           // TODO: add quality
-          printf("%s", "Saving image...\n");
-          image.save(mOutput, format, 10);
+          printf("CutyCapt: %s", "Saving image...\n");
+          printf("CutyCapt: Quality = %d\n", mQuality);
+          image.save(mOutput, format, mQuality);
           emit imageWasSaved();
         }
       };

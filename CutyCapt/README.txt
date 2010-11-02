@@ -1,2 +1,9 @@
-<h1>CutyCapt</h1>
-A git-svn import of Björn Höhrmann's CutyCapt. I need to find a way to take a screenshot of webpages with javascript and flash components.
+A git-svn import of Björn Höhrmann's CutyCapt.
+
+// simple mock for argv
+argc = 4;
+argv = new char*[100];cd
+argv[0] = (char *)"";
+argv[1] = (char *)"--url=http://github.com/jdecuyper";
+argv[2] = (char *)"--out=github.png";
+argv[3] = (char *)"--quality=7";

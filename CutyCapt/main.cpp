@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
     int argHelp = 0;
     int argDelay = 0;
     int argMaxWait = 90000;
+    int quality = 0;
 
     const char* errMsg = NULL;
     char* argUrl = NULL;
@@ -55,7 +56,7 @@ int main(int argc, char *argv[])
     QByteArray body;
     QNetworkRequest req;
 
-    CutyArgs::Parse(argc, argv, &argUrl, &errMsg, &argUserStyle, &argIconDbPath, argOut, body, page, method, argHelp, app);
+    CutyArgs::Parse(argc, argv, &argUrl, &errMsg, &argUserStyle, &argIconDbPath, argOut, body, &quality, page, method, argHelp, app);
 
     if (argUrl == NULL || argOut == NULL || argHelp) {
         if(argc == 1){
@@ -71,7 +72,7 @@ int main(int argc, char *argv[])
 
     req.setUrl( QUrl(argUrl) );
 
-    CutyCapt main(&page, argOut, argDelay, format);
+    CutyCapt main(&page, argOut, argDelay, format, quality);
 
     app.connect(&page, SIGNAL(loadFinished(bool)), &main, SLOT(DocumentComplete(bool)));
     app.connect(&main, SIGNAL(imageWasSaved()), &timer, SLOT(Stop()));

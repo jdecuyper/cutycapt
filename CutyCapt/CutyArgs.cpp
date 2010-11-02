@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, CutyPage &page, QNetworkAccessManager::Operation &method, int argHelp, QApplication &app){
+void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, int *quality, CutyPage &page, QNetworkAccessManager::Operation &method, int argHelp, QApplication &app){
     int argDelay = 0;
     int argMinWidth = 800;
     int argDefHeight = 600;
@@ -49,10 +49,13 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
        // --name=value options
        if (strncmp("--url", s, nlen) == 0) {
            *argUrl = value;
-           printf("Loading URL: %s \n", *argUrl);
+           printf("CutyCapt: loading URL: %s \n", *argUrl);
+       } else if (strncmp("--quality", s, nlen) == 0) {
+         *quality = (int)atoi(value);
+
        } else if (strncmp("--min-width", s, nlen) == 0) {
          // TODO: add error checking here?
-         argMinWidth = (unsigned int)atoi(value);
+        argMinWidth = (unsigned int)atoi(value);
 
        } else if (strncmp("--delay", s, nlen) == 0) {
          // TODO: see above

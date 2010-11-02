@@ -4,6 +4,9 @@
 #include <QObject>
 #include "CutyPage.h"
 
+#define QUALITY_MAX 10
+#define QUALITY_MIN 1
+
 class CutyCapt : public QObject {
   Q_OBJECT
 
@@ -14,7 +17,7 @@ public:
     RenderTreeFormat, PngFormat, JpegFormat, MngFormat, TiffFormat, GifFormat,
     BmpFormat, PpmFormat, XbmFormat, XpmFormat, OtherFormat };
   CutyCapt();
-  CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format);
+  CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format, int quality);
 
 private slots:
   void DocumentComplete(bool ok);
@@ -36,7 +39,7 @@ protected:
   int          mDelay;
   CutyPage*    mPage;
   OutputFormat mFormat;
-
+  int          mQuality;
 };
 
 #endif // CUTYCAPT_H
