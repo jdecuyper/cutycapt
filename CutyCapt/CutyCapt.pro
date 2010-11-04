@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     CutyPage.cpp \
     CutyHelp.cpp \
     CutyArgs.cpp \
-    CutyTimer.cpp
+    CutyTimer.cpp \
+    CutyUtil.cpp
 
 HEADERS += \
     CutyCapt.h \
@@ -29,4 +30,5 @@ HEADERS += \
     CutyHelp.h \
     CutyExt.h \
     CutyArgs.h \
-    CutyTimer.h
+    CutyTimer.h \
+    CutyUtil.h

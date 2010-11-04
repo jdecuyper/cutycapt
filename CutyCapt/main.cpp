@@ -1,4 +1,4 @@
-    ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 //
 // CutyCapt - A Qt WebKit Web Page Rendering Capture Utility
 //
@@ -32,8 +32,6 @@
 #include <windows.h>
 
 using namespace std;
-
-void handleText(int i);
 
 int main(int argc, char *argv[])
 {

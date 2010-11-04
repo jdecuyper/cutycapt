@@ -2,6 +2,8 @@
 #include "CutyPage.h"
 #include "CutyCapt.h"
 #include "CutyExt.h"
+#include "CutyUtil.h"
+
 #include <QApplication>
 #include <QtWebKit>
 #include <QNetworkRequest>
@@ -50,21 +52,14 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
        if (strncmp("--url", s, nlen) == 0) {
            *argUrl = value;
            printf("CutyCapt: loading URL: %s \n", *argUrl);
-       } else if (strncmp("--quality", s, nlen) == 0) {
-         *quality = (int)atoi(value);
-
+       } else if (strncmp("--out-quality", s, nlen) == 0) {
+           CutyUtil::CustomAtoi(value, quality);
        } else if (strncmp("--min-width", s, nlen) == 0) {
-         // TODO: add error checking here?
-        argMinWidth = (unsigned int)atoi(value);
-
+           CutyUtil::CustomAtoi(value, &argMinWidth);
        } else if (strncmp("--delay", s, nlen) == 0) {
-         // TODO: see above
-         argDelay = (unsigned int)atoi(value);
-
+           CutyUtil::CustomAtoi(value, &argDelay);
        } else if (strncmp("--max-wait", s, nlen) == 0) {
-         // TODO: see above
-         argMaxWait = (unsigned int)atoi(value);
-
+           CutyUtil::CustomAtoi(value, &argMaxWait);
        } else if (strncmp("--out", s, nlen) == 0) {
          argOut = value;
          if (format == CutyCapt::OtherFormat)
