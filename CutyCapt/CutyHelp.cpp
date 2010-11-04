@@ -13,7 +13,7 @@ void CutyHelp::Show(){
          "  --url=<url>                    The URL to capture (http:...|file:...|...)   \n"
          "  --out=<path>                   The target file (.png|pdf|ps|svg|jpeg|...)   \n"
          "  --out-format=<f>               Like extension in --out, overrides heuristic \n"
-         "  --out-quality=<int>            Output format quality from 1 to 10           \n"
+         "  --quality=<int>            Output format quality from 1 to 10           \n"
          "  --min-width=<int>              Minimal width for the image (default: 800)   \n"
          "  --max-wait=<ms>                Don't wait more than (default: 90000, inf: 0)\n"
          "  --delay=<ms>                   After successful load, wait (default: 0)     \n"

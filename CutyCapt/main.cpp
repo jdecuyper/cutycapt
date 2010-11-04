@@ -60,7 +60,8 @@ int main(int argc, char *argv[])
         if(argc == 1){
             printf("CutyCapt: %s\n", errMsg);
         } else {
-            CutyHelp::Show();
+            printf("CutyCapt: yes\n");
+            //CutyHelp::Show();
         }
         return EXIT_FAILURE;
     }

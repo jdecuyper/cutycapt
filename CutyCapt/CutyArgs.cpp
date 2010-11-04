@@ -52,7 +52,7 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
        if (strncmp("--url", s, nlen) == 0) {
            *argUrl = value;
            printf("CutyCapt: loading URL: %s \n", *argUrl);
-       } else if (strncmp("--out-quality", s, nlen) == 0) {
+       } else if (strncmp("--quality", s, nlen) == 0) {
            CutyUtil::CustomAtoi(value, quality);
        } else if (strncmp("--min-width", s, nlen) == 0) {
            CutyUtil::CustomAtoi(value, &argMinWidth);
