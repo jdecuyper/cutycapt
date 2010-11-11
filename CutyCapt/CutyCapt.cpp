@@ -122,7 +122,6 @@ void CutyCapt::saveSnapshot() {
           painter.begin(&image);
           mainFrame->render(&painter);
           painter.end();
-          // TODO: add quality
           printf("CutyCapt: %s", "Saving image...\n");
           printf("CutyCapt: Quality = %d\n", mQuality);
           image.save(mOutput, format, mQuality);

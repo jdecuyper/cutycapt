@@ -13,10 +13,11 @@
 
 #define INVALID_ARGS "No valid arguments were supplied (try --help)."
 #define INVALID_HEADER "HTTP header supplied is not valid (try --help)."
+#define INVALID_HTTP_METHOD "HTTP method supplied is not valid (try --help)."
 
 using namespace std;
 
-void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, int *quality, CutyPage &page, QNetworkAccessManager::Operation &method, int argHelp, QApplication &app){
+void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, int *quality, CutyPage &page, QNetworkAccessManager::Operation &method, int *argHelp, QApplication &app){
     int argDelay = 0;
     int argMinWidth = 800;
     int argDefHeight = 600;
@@ -35,14 +36,14 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
 
        // boolean options
        if (strcmp("--help", s) == 0) {
-         ++argHelp;
+         *argHelp = 1;
          break;
        }
 
        value = strchr(s, '=');
        if (value == NULL) {
          *errMsg = INVALID_ARGS;
-         argHelp = 1;
+         *argHelp = 1;
          break;
        }
 
@@ -122,7 +123,7 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
 
          if (format == CutyCapt::OtherFormat) {
            *errMsg = INVALID_ARGS;
-           argHelp = 1;
+           *argHelp = 1;
            break;
          }
 
@@ -131,27 +132,29 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
 
          if (hv == NULL) {
            *errMsg = (char *)INVALID_HEADER;
-           argHelp = 1;
+           *argHelp = 1;
            break;
          }
 
          req.setRawHeader(QByteArray(value, hv - value), hv + 1);
 
        } else if (strncmp("--method", s, nlen) == 0) {
-         if (strcmp("value", "get") == 0)
+         if (strcmp(value, "get") == 0)
            method = QNetworkAccessManager::GetOperation;
-         else if (strcmp("value", "put") == 0)
+         else if (strcmp(value, "put") == 0)
            method = QNetworkAccessManager::PutOperation;
-         else if (strcmp("value", "post") == 0)
+         else if (strcmp(value, "post") == 0)
            method = QNetworkAccessManager::PostOperation;
-         else if (strcmp("value", "head") == 0)
+         else if (strcmp(value, "head") == 0)
            method = QNetworkAccessManager::HeadOperation;
-         else
-           (void)0; // TODO: ...
-
+         else {
+           *errMsg = INVALID_HTTP_METHOD;
+           *argHelp = 1;
+           break;
+         }
        } else {
-         // TODO: error
-         argHelp = 1;
+         *errMsg = INVALID_ARGS;
+         *argHelp = 1;
        }
      }
 

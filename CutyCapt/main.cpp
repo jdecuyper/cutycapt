@@ -35,7 +35,6 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-
     int argHelp = 0;
     int argDelay = 0;
     int argMaxWait = 90000;
@@ -48,21 +47,20 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv, true);
     CutyCapt::OutputFormat format = CutyCapt::OtherFormat;
-    QString argOut = NULL;
+    QString argOut = NULL; // holds the name of the output image
     CutyPage page;
     QNetworkAccessManager::Operation method = QNetworkAccessManager::GetOperation;
     QByteArray body;
     QNetworkRequest req;
 
-    CutyArgs::Parse(argc, argv, &argUrl, &errMsg, &argUserStyle, &argIconDbPath, argOut, body, &quality, page, method, argHelp, app);
+    // insert mock from README file here if you don't want to type all args from the command line at every test...
 
-    if (argUrl == NULL || argOut == NULL || argHelp) {
-        if(argc == 1){
+    CutyArgs::Parse(argc, argv, &argUrl, &errMsg, &argUserStyle, &argIconDbPath, argOut, body, &quality, page, method, &argHelp, app);
+
+    if (argUrl == NULL || argOut == NULL || argHelp == 1) {
+        if(errMsg != NULL)
             printf("CutyCapt: %s\n", errMsg);
-        } else {
-            printf("CutyCapt: yes\n");
-            //CutyHelp::Show();
-        }
+        CutyHelp::Show();
         return EXIT_FAILURE;
     }
 
