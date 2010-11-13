@@ -17,7 +17,7 @@ CutyCapt::CutyCapt()
 {
 }
 
-CutyCapt::CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format, int quality) {
+CutyCapt::CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format, int quality, int isVerbose) {
   mPage = page;
   mOutput = output;
   mDelay = delay;
@@ -28,6 +28,7 @@ CutyCapt::CutyCapt(CutyPage* page, const QString& output, int delay, OutputForma
     mQuality = quality * 10;
   else
     mQuality = -1; //default
+  mIsVerbose = isVerbose;
 }
 
 void CutyCapt::InitialLayoutCompleted() {
@@ -122,8 +123,10 @@ void CutyCapt::saveSnapshot() {
           painter.begin(&image);
           mainFrame->render(&painter);
           painter.end();
-          printf("CutyCapt: %s", "Saving image...\n");
-          printf("CutyCapt: Quality = %d\n", mQuality);
+          if(mIsVerbose > 0) {
+            printf("CutyCapt: %s", "Saving image...\n");
+            printf("CutyCapt: Quality = %d\n", mQuality);
+          }
           image.save(mOutput, format, mQuality);
           emit imageWasSaved();
         }

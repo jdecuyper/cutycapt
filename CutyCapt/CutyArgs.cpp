@@ -17,7 +17,7 @@
 
 using namespace std;
 
-void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, int *quality, CutyPage &page, QNetworkAccessManager::Operation &method, int *argHelp, QApplication &app){
+void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, int *quality, int *isVerbose, CutyPage &page, QNetworkAccessManager::Operation &method, int *argHelp, QApplication &app){
     int argDelay = 0;
     int argMinWidth = 800;
     int argDefHeight = 600;
@@ -52,7 +52,6 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
        // --name=value options
        if (strncmp("--url", s, nlen) == 0) {
            *argUrl = value;
-           printf("CutyCapt: loading URL: %s \n", *argUrl);
        } else if (strncmp("--quality", s, nlen) == 0) {
            CutyUtil::CustomAtoi(value, quality);
        } else if (strncmp("--min-width", s, nlen) == 0) {
@@ -69,8 +68,9 @@ void CutyArgs::Parse(int argc, char *argv[], char **argUrl, const char **errMsg,
                format = CutyExtMap[ix].id;
 
        } else if (strncmp("--user-styles", s, nlen) == 0) {
-         *argUserStyle = value;
-
+            *argUserStyle = value;
+       } else if (strncmp("--verbose", s, nlen) == 0) {
+            *isVerbose = 1;
        } else if (strncmp("--icon-database-path", s, nlen) == 0) {
          *argIconDbPath = value;
 

@@ -7,7 +7,7 @@
 
 class CutyArgs {
     public:
-        static void Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, int *quality, CutyPage &page, QNetworkAccessManager::Operation &method, int *argHelp, QApplication &app);
+        static void Parse(int argc, char *argv[], char **argUrl, const char **errMsg, char **argUserStyle, char **argIconDbPath, QString &argOut, QByteArray &body, int *quality, int *isVerbose, CutyPage &page, QNetworkAccessManager::Operation &method, int *argHelp, QApplication &app);
 };
 
 #endif // CUTYARGS_H

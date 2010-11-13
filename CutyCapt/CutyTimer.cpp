@@ -20,7 +20,7 @@ void CutyTimer::Start(){
 
 void CutyTimer::Stop( ) {
      QueryPerformanceCounter(&timer.stop);
-     cout << "CutyCapt: snapshot took: " << GetElapsedTime() << " seconds...\n";
+     //cout << "CutyCapt: snapshot took: " << GetElapsedTime() << " seconds...\n";
 }
 
 double CutyTimer::GetElapsedTime(){

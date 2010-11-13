@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
     int argDelay = 0;
     int argMaxWait = 90000;
     int quality = 0;
+    int isVerbose = 0;
 
     const char* errMsg = NULL;
     char* argUrl = NULL;
@@ -55,7 +56,16 @@ int main(int argc, char *argv[])
 
     // insert mock from README file here if you don't want to type all args from the command line at every test...
 
-    CutyArgs::Parse(argc, argv, &argUrl, &errMsg, &argUserStyle, &argIconDbPath, argOut, body, &quality, page, method, &argHelp, app);
+    // simple mock for argv
+    argc = 5;
+    argv = new char*[100];
+    argv[0] = (char *)"";
+    argv[1] = (char *)"--url=http://stackoverflow.com";
+    argv[2] = (char *)"--out=so.png";
+    argv[3] = (char *)"--quality=7";
+    argv[4] = (char *)"--method=get";
+
+    CutyArgs::Parse(argc, argv, &argUrl, &errMsg, &argUserStyle, &argIconDbPath, argOut, body, &quality, &isVerbose, page, method, &argHelp, app);
 
     if (argUrl == NULL || argOut == NULL || argHelp == 1) {
         if(errMsg != NULL)
@@ -69,7 +79,7 @@ int main(int argc, char *argv[])
 
     req.setUrl( QUrl(argUrl) );
 
-    CutyCapt main(&page, argOut, argDelay, format, quality);
+    CutyCapt main(&page, argOut, argDelay, format, quality, isVerbose);
 
     app.connect(&page, SIGNAL(loadFinished(bool)), &main, SLOT(DocumentComplete(bool)));
     app.connect(&main, SIGNAL(imageWasSaved()), &timer, SLOT(Stop()));
@@ -86,7 +96,6 @@ int main(int argc, char *argv[])
     else {
         page.mainFrame()->load(req, method);
     }
-
     return app.exec();
 }
 

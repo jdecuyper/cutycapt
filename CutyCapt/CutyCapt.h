@@ -17,7 +17,7 @@ public:
     RenderTreeFormat, PngFormat, JpegFormat, MngFormat, TiffFormat, GifFormat,
     BmpFormat, PpmFormat, XbmFormat, XpmFormat, OtherFormat };
   CutyCapt();
-  CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format, int quality);
+  CutyCapt(CutyPage* page, const QString& output, int delay, OutputFormat format, int quality, int isVerbose);
 
 private slots:
   void DocumentComplete(bool ok);
@@ -40,6 +40,7 @@ protected:
   CutyPage*    mPage;
   OutputFormat mFormat;
   int          mQuality;
+  int          mIsVerbose;
 };
 
 #endif // CUTYCAPT_H
